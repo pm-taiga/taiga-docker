@@ -1,0 +1,40 @@
+# TAIGA_HOSTNAME: 192.168.1.152
+# SECRET_KEY: fasdfadsg3qret34542fgvfd
+
+
+# RE_CLONE_SRC_FROM_GIT: False
+
+# HOME_TAIGA: /home/taiga
+
+# BACK_END:
+#   CONFIG_HOST: ./backend
+#   SRC_HOST: ./backend/src
+#   SRC_CONTAINER: /taiga-back
+#   DATA_HOST: ./taiga-back
+#   PORT: 8000
+# API_SERVER: api
+
+# FRONT_END:
+#   BASENAME: taiga-front-dist
+#   CONFIG_HOST: ./frontend
+#   SRC_BASE: ./frontend/src
+
+# EVENTS:
+#   BASENAME: taiga-events
+#   git-repo: https://github.com/taigaio/taiga-events.git
+#   CONFIG_HOST: ./events
+#   SRC_BASE: ./events/src
+#   PORT: 8888
+#   SERVER: events
+
+# POSTGRES:
+#   SERVER: pg_db
+#   USER: taiga
+#   PASSWORD: taiga
+#   VOLUMN_PATH: ./db/postgres
+
+# RABBITMQ:
+#   SERVER: rabbitmq
+#   HOSTNAME: mymq
+#   DEFAULT_USER: taiga
+#   DEFAULT_PASS: taiga
