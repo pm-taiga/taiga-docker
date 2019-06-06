@@ -1,0 +1,12 @@
+[submodule "submodule/taiga-front"]
+	path = submodule/taiga-front
+	url = git@github.com:pm-taiga/taiga-front.git
+[submodule "submodule/taiga-back"]
+	path = submodule/taiga-back
+	url = git@github.com:pm-taiga/taiga-back.git
+[submodule "submodule/taiga-front-dist"]
+	path = submodule/taiga-front-dist
+	url = git@github.com:pm-taiga/taiga-front-dist.git
+[submodule "submodule/taiga-events"]
+	path = submodule/taiga-events
+	url = git@github.com:pm-taiga/taiga-events.git
