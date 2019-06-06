@@ -20,9 +20,12 @@ def LoadConfig(szFilePath):
 
     with open(szFilePath, 'r') as fp:
         dictConfig = yaml.load(fp)
+        if dictConfig is None:
+            return {}
+        logging.getLogger("myLog").debug("dictConfig:", str(dictConfig))
 
         def RecursiveSetDict(dictConfigTemp, szPrefix, dictOutputConfigTemp):
-            for szKey, szValue in dictConfigTemp:
+            for szKey, szValue in dictConfigTemp.items():
                 if isinstance(szValue , dict):
                     RecursiveSetDict(szValue, szPrefix + szKey + "_", dictOutputConfigTemp)
                 else:
@@ -70,8 +73,8 @@ def Main(args):
         "logic/template/frontend/nginx/default.conf": "../../temp/frontend/nginx/default.conf",
         "logic/template/frontend/scripts/entrypoint.sh": "../../temp/frontend/scripts/entrypoint.sh",
     }
-    for szKey, szValue in dictFileMap:
-        logging.getLogger("myLog").debug("render config:", szKey, szValue)
+    for szKey, szValue in dictFileMap.items():
+        logging.getLogger("myLog").debug("render config:%s, %s", szKey, szValue)
         util.RenderConfig(szKey, szValue, dictConfig)
 
     logging.getLogger("myLog").debug("finished")
