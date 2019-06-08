@@ -1,6 +1,6 @@
 FROM nginx:1.13-alpine
 
-LABEL maintainer="douglasmirandasilva@gmail.com"
+LABEL maintainer="stephenxjc@gmail.com"
 LABEL taiga_version="tag:3.3.7-stable"
 
 ENV TAIGA_VERSION 3.3.7-stable

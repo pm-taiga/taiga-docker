@@ -12,9 +12,9 @@ services:
       - postgres_data:/var/lib/postgresql/data
       - postgres_backup:/backups
     environment:
-      - POSTGRES_USER=taiga
-      - POSTGRES_DB=taiga
-      - POSTGRES_PASSWORD=123
+      - POSTGRES_DB={{POST_GRES_SQL_NAME}}
+      - POSTGRES_USER={{POST_GRES_SQL_USER}}
+      - POSTGRES_PASSWORD={{POST_GRES_SQL_PASSWORD}}
 
   redis:
     image: redis:4.0-alpine
@@ -40,9 +40,9 @@ services:
       # - DJANGO_DEBUG=True
       - DJANGO_SECRET_KEY=DJANGO_SECRET_KEY
       # DJANGO_DB_* must have the same values as <postgresql> service
-      - DJANGO_DB_USER=taiga
-      - DJANGO_DB_NAME=taiga
-      - DJANGO_DB_PASSWORD=123
+      # - DJANGO_DB_USER=taiga
+      # - DJANGO_DB_NAME=taiga
+      # - DJANGO_DB_PASSWORD=123
       # - DJANGO_ALLOWED_HOSTS=example.com,example2.com
       # Must be in lowercase, because we are using in a json file <frontend> (conf.json)
       # - TAIGA_PUBLIC_REGISTER_ENABLED=false

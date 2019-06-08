@@ -1,0 +1,7 @@
+{
+    "url": "amqp://taiga:taiga@rabbitmq:5672/taiga",
+    "secret": "{{TAIGA_SECRET_KEY}}",
+    "webSocketServer": {
+        "port": 8888
+    }
+}

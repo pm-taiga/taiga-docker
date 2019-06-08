@@ -22,7 +22,7 @@ def LoadConfig(szFilePath):
         dictConfig = yaml.load(fp)
         if dictConfig is None:
             return {}
-        logging.getLogger("myLog").debug("dictConfig:", str(dictConfig))
+        logging.getLogger("myLog").debug("dictConfig:%s", str(dictConfig))
 
         def RecursiveSetDict(dictConfigTemp, szPrefix, dictOutputConfigTemp):
             for szKey, szValue in dictConfigTemp.items():
@@ -67,11 +67,13 @@ def Main(args):
         # events
         "logic/template/events/Dockerfile": "../../temp/events/Dockerfile",
         "logic/template/events/scripts/entrypoint.sh": "../../temp/events/scripts/entrypoint.sh",
+        "logic/template/events/config.json": "../../submodule/taiga-events/config.json",
 
         # frontend
         "logic/template/frontend/Dockerfile": "../../temp/frontend/Dockerfile",
         "logic/template/frontend/nginx/default.conf": "../../temp/frontend/nginx/default.conf",
         "logic/template/frontend/scripts/entrypoint.sh": "../../temp/frontend/scripts/entrypoint.sh",
+        "logic/template/frontend/conf.json": "../../submodule/taiga-front-dist/dist/conf.json",
     }
     for szKey, szValue in dictFileMap.items():
         logging.getLogger("myLog").debug("render config:%s, %s", szKey, szValue)

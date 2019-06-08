@@ -1,5 +1,29 @@
+TAIGA:
+  HOSTNAME: taiga.yoursite.com
+  SECRET_KEY: fasdfadsg3qret34542fgvfd
+  API_URL: https://taiga.yoursite.com/api/v1/
+  EVENTS_URL: wss://taiga.yoursite.com/events
+  
+URL_SCHEME: http
+
+BACK_END:
+  DEBUG: True
+  DB_CHECK_LIMIT_RETRIES: 5
+  DB_CHECK_SLEEP_INTERVAL: 5
+  PUBLIC_REGISTER_ENABLED: True
+
+FRONT_END:
+  NAME: api
+  DEBUG: true
+  PUBLIC_REGISTER_ENABLED: true
+
+POST_GRES_SQL:
+  NAME: taiga 
+  USER: taiga
+  PASSWORD: 123
+  HOST: postgresql
+
 # TAIGA_HOSTNAME: 192.168.1.152
-# SECRET_KEY: fasdfadsg3qret34542fgvfd
 
 
 # RE_CLONE_SRC_FROM_GIT: False
