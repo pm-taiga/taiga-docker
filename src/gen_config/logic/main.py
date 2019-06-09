@@ -73,7 +73,6 @@ def RenderConfig(dictConfig):
         "logic/template/frontend/nginx/default.conf": "../../temp/frontend/nginx/default.conf",
         "logic/template/frontend/scripts/entrypoint.sh": "../../temp/frontend/scripts/entrypoint.sh",
         "logic/template/frontend/conf.json": "../../submodule/taiga-front-dist/dist/conf.json",
-        "logic/template/frontend/conf.json": "../../submodule/taiga-front-dist-3.3.7-stable/dist/conf.json",
     }
     for szKey, szValue in dictFileMap.items():
         logging.getLogger("myLog").debug("render config:%s, %s", szKey, szValue)
