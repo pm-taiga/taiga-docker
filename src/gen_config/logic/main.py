@@ -12,7 +12,17 @@ import logging
 
 import common.util as util
 from common.my_exception import MyException
+import common.git_util as git_util
 
+
+# submodule checkout version
+def SubmoduleCheckout():
+    dictSubmoduleToVersion = {
+        "../../submodule/taiga-front-dist": "3.3.7-stable",
+    }
+    for szSubmodule, szVersion in dictSubmoduleToVersion.items():
+        logging.getLogger("myLog").debug("git checkout version:%s,%s", szSubmodule, szVersion)
+        git_util.checkout(szSubmodule, szVersion)
 
 # 转换所有的配置文件，多层key合并为一个key，并用'_'连接
 # 比如 a["BOY"]["NAME"]="xjc" ==> a["BOY_NAME"]="xjc"
@@ -40,21 +50,7 @@ def LoadConfig(szFilePath):
 
         return dictOutputConfig
 
-def Main(args):
-    logging.getLogger("myLog").debug("main start")
-
-    # 加载配置表
-    import logic.my_config_loader as my_config_loader
-    szConfFullPath = my_config_loader.MyConfigLoader.CheckConf(args)
-    configLoader = my_config_loader.MyConfigLoader(szConfFullPath)
-    configLoader.ParseConf()
-
-    # load config
-    dictConfig = LoadConfig(configLoader.SetupConfigPath)
-    if dictConfig is None:
-        raise MyException("Load yaml file failed:" + configLoader.SetupConfigPath)
-    logging.getLogger("myLog").debug("dictConfig" + str(dictConfig))
-
+def RenderConfig(dictConfig):
     # render file to target
     dictFileMap = {
         # docker-compose
@@ -82,6 +78,29 @@ def Main(args):
     for szKey, szValue in dictFileMap.items():
         logging.getLogger("myLog").debug("render config:%s, %s", szKey, szValue)
         util.RenderConfig(szKey, szValue, dictConfig)
+    pass
+
+def Main(args):
+    logging.getLogger("myLog").debug("main start")
+
+    # 加载配置表
+    import logic.my_config_loader as my_config_loader
+    szConfFullPath = my_config_loader.MyConfigLoader.CheckConf(args)
+    configLoader = my_config_loader.MyConfigLoader(szConfFullPath)
+    configLoader.ParseConf()
+
+    # checkout version
+    SubmoduleCheckout()
+
+    # load config
+    dictConfig = LoadConfig(configLoader.SetupConfigPath)
+    if dictConfig is None:
+        raise MyException("Load yaml file failed:" + configLoader.SetupConfigPath)
+    logging.getLogger("myLog").debug("dictConfig" + str(dictConfig))
+
+    # render config
+    RenderConfig(dictConfig)
+
 
     logging.getLogger("myLog").debug("finished")
 
