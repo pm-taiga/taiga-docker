@@ -5,6 +5,7 @@
 
 # desc: 主函数入口
 
+import os
 import sys
 import yaml
 import logging
@@ -22,7 +23,7 @@ def LoadConfig(szFilePath):
         dictConfig = yaml.load(fp)
         if dictConfig is None:
             return {}
-        logging.getLogger("myLog").debug("dictConfig:%s", str(dictConfig))
+        logging.getLogger("myLog").debug("file dictConfig:%s", str(dictConfig))
 
         def RecursiveSetDict(dictConfigTemp, szPrefix, dictOutputConfigTemp):
             for szKey, szValue in dictConfigTemp.items():
@@ -34,6 +35,8 @@ def LoadConfig(szFilePath):
         dictOutputConfig = {}
 
         RecursiveSetDict(dictConfig, "", dictOutputConfig)
+
+        dictOutputConfig["PROJECT_BASE_IN_HOST"] = os.path.abspath(dictOutputConfig["PROJECT_BASE_IN_HOST"])
 
         return dictOutputConfig
 
@@ -74,6 +77,7 @@ def Main(args):
         "logic/template/frontend/nginx/default.conf": "../../temp/frontend/nginx/default.conf",
         "logic/template/frontend/scripts/entrypoint.sh": "../../temp/frontend/scripts/entrypoint.sh",
         "logic/template/frontend/conf.json": "../../submodule/taiga-front-dist/dist/conf.json",
+        "logic/template/frontend/conf.json": "../../submodule/taiga-front-dist-3.3.7-stable/dist/conf.json",
     }
     for szKey, szValue in dictFileMap.items():
         logging.getLogger("myLog").debug("render config:%s, %s", szKey, szValue)

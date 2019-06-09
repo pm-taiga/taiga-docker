@@ -1,8 +1,10 @@
+PROJECT_BASE_IN_HOST: ../..
 TAIGA:
-  HOSTNAME: taiga.yoursite.com
+  HOSTNAME: localhost
   SECRET_KEY: fasdfadsg3qret34542fgvfd
-  API_URL: https://taiga.yoursite.com/api/v1/
-  EVENTS_URL: wss://taiga.yoursite.com/events
+  API_URL: /api/v1/ 
+  EVENTS_URL: ws://localhost/events
+  HOME: /home/taiga
   
 URL_SCHEME: http
 
@@ -13,9 +15,8 @@ BACK_END:
   PUBLIC_REGISTER_ENABLED: True
 
 FRONT_END:
-  NAME: api
-  DEBUG: true
-  PUBLIC_REGISTER_ENABLED: true
+  DEBUG: 'true'
+  PUBLIC_REGISTER_ENABLED: 'true'
 
 POST_GRES_SQL:
   NAME: taiga 
