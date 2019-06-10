@@ -15,10 +15,7 @@ RUN apk update \
     git
 
 WORKDIR /taiga_backend
-
-ADD https://github.com/taigaio/taiga-back/archive/${TAIGA_VERSION}.tar.gz ./
-    RUN tar -xzf ${TAIGA_VERSION}.tar.gz -C ./ taiga-back-${TAIGA_VERSION} --strip-components=1
-RUN rm ${TAIGA_VERSION}.tar.gz
+COPY requirements.txt ./requirements.txt
 
 # Don't want pip to use git, so I'm replacing with pypi.  
 RUN sed -i 's,git+https://github.com/Xof/django-pglocks.git,django-pglocks==1.0.2,g' requirements.txt
@@ -26,6 +23,7 @@ RUN sed -i 's,git+https://github.com/Xof/django-pglocks.git,django-pglocks==1.0.
 # local.py and checkdb.py and celery
 # using gevent to run taiga gunicorn (workers)
 # using gevent on celery (workers)
+RUN echo "" >> requirements.txt
 RUN echo "django-environ==0.4.0" >> requirements.txt
 RUN echo "gevent==1.1.2" >> requirements.txt
 RUN echo "django-anymail==0.5" >> requirements.txt
@@ -33,12 +31,13 @@ RUN echo "django-anymail==0.5" >> requirements.txt
 RUN pip wheel --wheel-dir=./taiga_python_dependencies -r requirements.txt
 
 
-# FINAL IMAGE
+# final image
 FROM python:3.6-alpine3.6
 
-LABEL maintainer="douglasmirandasilva@gmail.com"
+LABEL maintainer="stephenxjc@gmail.com"
 LABEL taiga_version="tag:3.3.7"
 
+# install
 WORKDIR /taiga_backend
 
 COPY --from=BUILDER /taiga_backend ./
@@ -53,18 +52,23 @@ RUN apk add --no-cache \
     # Other tools
     git
 
-RUN pip install --no-cache-dir --no-index --find-links=taiga_python_dependencies -r requirements.txt \
-    && rm -R ./taiga_python_dependencies \
-    && python manage.py compilemessages
+RUN pip install --no-cache-dir --no-index --find-links=taiga_python_dependencies -r requirements.txt
+RUN rm -R ./taiga_python_dependencies
 
-COPY local.py settings/local.py
-COPY celery_local.py settings/celery_local.py
-COPY scripts/ /scripts/
+# add user
+RUN addgroup -S taiga && adduser -S -G taiga taiga 
 
-RUN mkdir /taiga_backend/media && mkdir /taiga_backend/static-root \
-    && addgroup -S taiga && adduser -S -G taiga taiga \
-    && chown -R taiga ./ \
-    && chown -R taiga /scripts/ \
-    && chmod +x /scripts/entrypoint.sh
+# dir
+RUN mkdir -p /taiga_backend/media 
+RUN mkdir -p /taiga_backend/static-root
+RUN mkdir -p {{TAIGA_HOME}}/taiga-back
+COPY scripts/ {{TAIGA_HOME}}/scripts/
 
+# chown
+RUN chown -R taiga /taiga_backend
+RUN chown -R taiga {{TAIGA_HOME}}
+RUN chmod +x {{TAIGA_HOME}}/scripts/entrypoint.sh
+
+# env
+WORKDIR {{TAIGA_HOME}}/taiga-back
 USER taiga

@@ -20,6 +20,7 @@ def SubmoduleCheckout():
     dictSubmoduleToVersion = {
         "../../submodule/taiga-front-dist": "3.3.7-stable",
         "../../submodule/taiga-events": "master",
+        "../../submodule/taiga-back": "3.3.7",
     }
     for szSubmodule, szVersion in dictSubmoduleToVersion.items():
         logging.getLogger("myLog").debug("git checkout version:%s,%s", szSubmodule, szVersion)
@@ -60,9 +61,12 @@ def RenderConfig(dictConfig):
         # backend
         "logic/template/backend/local.py": "../../temp/backend/local.py",
         "logic/template/backend/celery_local.py": "../../temp/backend/celery_local.py",
+        "logic/template/backend/requirements.txt": "../../temp/backend/requirements.txt",
         "logic/template/backend/Dockerfile": "../../temp/backend/Dockerfile",
         "logic/template/backend/scripts/checkdb.py": "../../temp/backend/scripts/checkdb.py",
         "logic/template/backend/scripts/entrypoint.sh": "../../temp/backend/scripts/entrypoint.sh",
+        "logic/template/backend/local.py": "../../submodule/taiga-back/settings/local.py",
+        "logic/template/backend/celery_local.py": "../../submodule/taiga-back/settings/celery_local.py",
 
         # events
         "logic/template/events/Dockerfile": "../../temp/events/Dockerfile",
