@@ -59,8 +59,6 @@ def RenderConfig(dictConfig):
         "logic/template/docker-compose.yml": "../../docker-compose.yml",
         
         # backend
-        "logic/template/backend/local.py": "../../temp/backend/local.py",
-        "logic/template/backend/celery_local.py": "../../temp/backend/celery_local.py",
         "logic/template/backend/requirements.txt": "../../temp/backend/requirements.txt",
         "logic/template/backend/Dockerfile": "../../temp/backend/Dockerfile",
         "logic/template/backend/scripts/checkdb.py": "../../temp/backend/scripts/checkdb.py",
@@ -71,13 +69,11 @@ def RenderConfig(dictConfig):
         # events
         "logic/template/events/Dockerfile": "../../temp/events/Dockerfile",
         "logic/template/events/package.json": "../../temp/events/package.json",
-        "logic/template/events/scripts/entrypoint.sh": "../../temp/events/scripts/entrypoint.sh",
         "logic/template/events/config.json": "../../submodule/taiga-events/config.json",
 
         # frontend
         "logic/template/frontend/Dockerfile": "../../temp/frontend/Dockerfile",
         "logic/template/frontend/nginx/default.conf": "../../temp/frontend/nginx/default.conf",
-        "logic/template/frontend/scripts/entrypoint.sh": "../../temp/frontend/scripts/entrypoint.sh",
         "logic/template/frontend/conf.json": "../../submodule/taiga-front-dist/dist/conf.json",
     }
     for szKey, szValue in dictFileMap.items():
