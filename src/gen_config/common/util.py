@@ -49,7 +49,7 @@ def RemoveFileDir(szPath):
 
 
 def RenderConfig(szTemplatePath, szTargetPath, dictConfig):
-    assert(os.path.exists(szTemplatePath) and os.path.isfile(szTemplatePath), "template文件不存在" + szTemplatePath)
+    assert os.path.exists(szTemplatePath) and os.path.isfile(szTemplatePath), "template文件不存在" + szTemplatePath
 
     my_path.CreateFileDir(szTargetPath)
 
