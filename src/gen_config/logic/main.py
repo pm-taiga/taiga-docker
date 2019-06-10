@@ -19,6 +19,7 @@ import common.git_util as git_util
 def SubmoduleCheckout():
     dictSubmoduleToVersion = {
         "../../submodule/taiga-front-dist": "3.3.7-stable",
+        "../../submodule/taiga-events": "master",
     }
     for szSubmodule, szVersion in dictSubmoduleToVersion.items():
         logging.getLogger("myLog").debug("git checkout version:%s,%s", szSubmodule, szVersion)
@@ -65,6 +66,7 @@ def RenderConfig(dictConfig):
 
         # events
         "logic/template/events/Dockerfile": "../../temp/events/Dockerfile",
+        "logic/template/events/package.json": "../../temp/events/package.json",
         "logic/template/events/scripts/entrypoint.sh": "../../temp/events/scripts/entrypoint.sh",
         "logic/template/events/config.json": "../../submodule/taiga-events/config.json",
 

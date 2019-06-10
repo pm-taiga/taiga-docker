@@ -96,6 +96,8 @@ services:
 
   events:
     build: temp/events/
+    volumes:
+      - {{PROJECT_BASE_IN_HOST}}/submodule/taiga-events:{{TAIGA_HOME}}/taiga-events
     environment:
       # SAME AS DJANGO_SECRET_KEY
       - TAIGA_SECRET=DJANGO_SECRET_KEY
