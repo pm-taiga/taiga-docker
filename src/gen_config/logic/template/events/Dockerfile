@@ -11,6 +11,7 @@ RUN addgroup -S taiga && adduser -S -G taiga taiga
 # install
 WORKDIR {{TAIGA_HOME}}
 COPY package.json {{TAIGA_HOME}}/package.json
+RUN npm config set unsafe-perm true
 RUN npm install --production && npm install -g coffee-script
 
 # add path
