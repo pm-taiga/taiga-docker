@@ -27,6 +27,7 @@ RUN echo "" >> requirements.txt
 RUN echo "django-environ==0.4.0" >> requirements.txt
 RUN echo "gevent==1.1.2" >> requirements.txt
 RUN echo "django-anymail==0.5" >> requirements.txt
+RUN pip install --upgrade pip
 
 RUN pip wheel --wheel-dir=./taiga_python_dependencies -r requirements.txt
 

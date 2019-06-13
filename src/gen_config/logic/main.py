@@ -18,6 +18,7 @@ import common.git_util as git_util
 # submodule checkout version
 def SubmoduleCheckout():
     dictSubmoduleToVersion = {
+        "../../submodule/taiga-front": "3.3.7",
         "../../submodule/taiga-front-dist": "3.3.7-stable",
         "../../submodule/taiga-events": "master",
         "../../submodule/taiga-back": "3.3.7",
@@ -75,6 +76,7 @@ def RenderConfig(dictConfig):
         "logic/template/frontend/Dockerfile": "../../temp/frontend/Dockerfile",
         "logic/template/frontend/nginx/default.conf": "../../temp/frontend/nginx/default.conf",
         "logic/template/frontend/conf.json": "../../submodule/taiga-front-dist/dist/conf.json",
+        "logic/template/frontend/conf.json": "../../submodule/taiga-front/dist/conf.json",
     }
     for szKey, szValue in dictFileMap.items():
         logging.getLogger("myLog").debug("render config:%s, %s", szKey, szValue)
