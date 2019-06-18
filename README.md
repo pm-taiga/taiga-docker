@@ -67,6 +67,14 @@ def SubmoduleCheckout():
 src/gen_config/bin/run.bat
 ~~~
 
+* deploy taiga-front
+We need to deploy taiga-front that web browser can understand the words.
+
+~~~
+cd temp/frontend
+docker-compose up
+~~~
+
 ## run
 ~~~
 docker-compose up
