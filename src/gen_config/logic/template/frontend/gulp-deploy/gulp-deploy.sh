@@ -1,0 +1,2 @@
+#!/bin/bash
+docker run -it -p 9001:9001 --volume {{PROJECT_BASE_IN_HOST}}/submodule/taiga-front:/taiga-docker/submodule/taiga-front -v /taiga-docker/submodule/taiga-front/node_modules -w /taiga-docker/submodule/taiga-front taiga-front-dist-gen:v3 /bin/bash

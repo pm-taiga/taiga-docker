@@ -42,6 +42,7 @@ services:
     # command: ['gunicorn', '--worker-class', 'gevent', '--workers', '10', '-b', '0.0.0.0:8000', 'taiga.wsgi']
     command: ['gunicorn', '-b', '0.0.0.0:8000', 'taiga.wsgi']
 
+  # use dist version
   frontend:
     build: temp/frontend/
     volumes:

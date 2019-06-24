@@ -71,8 +71,12 @@ src/gen_config/bin/run.bat
 We need to deploy taiga-front that web browser can understand the words.
 
 ~~~
-cd temp/frontend
-docker-compose up
+# open images
+cd tools
+./gulp-deploy.sh
+
+# run deploy
+gulp deploy
 ~~~
 
 ## run
@@ -85,3 +89,43 @@ one of way
 
 * ctrl + c
 * docker-compose down
+
+
+## other 
+### make taiga-front-dist-gen
+#### create dockerfile
+~~~
+FROM ubuntu:18.04
+
+COPY package.json /taiga-docker/submodule/taiga-front/package.json
+~~~
+
+#### 创建一个images
+~~~
+docker build -t taiga-front-dist-gen:v1 .
+~~~
+
+#### run docker images 
+~~~
+docker run -it taiga-front-dist-gen:v1 /bin/bash
+~~~
+
+#### install in images
+~~~
+apt update
+apt install -y git curl vim
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+
+source ~/.bashrc
+
+nvm install v7.7.2
+
+npm install -g gulp
+
+cd /taiga-docker/submodule/taiga-front
+npm install
+~~~
+
+#### commit
+* docker ps 查看containerid
+* docker commit containerid taiga-front-dist-gen:v3
