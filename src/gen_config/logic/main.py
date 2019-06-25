@@ -77,8 +77,12 @@ def RenderConfig(dictConfig):
         "logic/template/frontend/nginx/default.conf": "../../temp/frontend/nginx/default.conf",
         "logic/template/frontend/conf.json": "../../submodule/taiga-front-dist/dist/conf.json",
         "logic/template/frontend/conf.json": "../../submodule/taiga-front/dist/conf.json",
-        "logic/template/frontend/gulp-default/gulp-default.sh": "../../tools/gulp-default.sh",
+        ## gulp deploy
+        "logic/template/frontend/gulp-deploy/Dockerfile": "../../temp/frontend/gulp-deploy/Dockerfile",
+        "logic/template/frontend/gulp-deploy/package.json": "../../temp/frontend/gulp-deploy/package.json",
+        "logic/template/frontend/gulp-deploy/make-gulp-deploy-image.sh": "../../tools/make-gulp-deploy-image.sh",
         "logic/template/frontend/gulp-deploy/gulp-deploy.sh": "../../tools/gulp-deploy.sh",
+        "logic/template/frontend/gulp-default/gulp-default.sh": "../../tools/gulp-default.sh",
     }
     for szKey, szValue in dictFileMap.items():
         logging.getLogger("myLog").debug("render config:%s, %s", szKey, szValue)

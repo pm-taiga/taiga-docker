@@ -133,3 +133,7 @@ temp/
 
 docker-compose.yml
 
+tools/gulp-default.sh
+tools/gulp-deploy.sh
+tools/make-gulp-deploy-image.sh
+

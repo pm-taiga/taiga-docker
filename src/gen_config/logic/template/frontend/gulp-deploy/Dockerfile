@@ -2,17 +2,17 @@ FROM ubuntu:18.04
 
 COPY package.json /taiga-docker/submodule/taiga-front/package.json
 
-# RUN apt update
-# RUN apt install -y git curl vim
-# RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+# Replace shell with bash so we can source files
+RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
-# RUN /bin/bash -c "source ~/.bashrc"
+RUN apt update
+RUN apt install -y git curl vim
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
 
-# RUN /bin/bash -c "nvm install v7.7.2"
+WORKDIR /taiga-docker/submodule/taiga-front
+RUN source ~/.nvm/nvm.sh;\
+    nvm install v7.7.2; \
+    npm install -g gulp; \
+    npm install;
 
-# RUN /bin/bash -c "npm install -g gulp"
-
-# WORKDIR /taiga-docker/submodule/taiga-front
-# RUN /bin/bash -c "npm install"
-
-# CMD ['/bin/bash']
+CMD ['/bin/bash']

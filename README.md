@@ -64,18 +64,26 @@ def SubmoduleCheckout():
 
 * run
 ~~~
-src/gen_config/bin/run.bat
+cd ..
+./gen_config.sh
 ~~~
 
-* deploy taiga-front
+## deploy front
 We need to deploy taiga-front that web browser can understand the words.
 
+* make-gulp-deploy-image
 ~~~
-# open images
+cd tools
+./make-gulp-deploy-image.sh
+~~~
+
+* deploy
+~~~
+// open deploy image
 cd tools
 ./gulp-deploy.sh
 
-# run deploy
+// run deploy
 gulp deploy
 ~~~
 
@@ -92,40 +100,3 @@ one of way
 
 
 ## other 
-### make taiga-front-dist-gen
-#### create dockerfile
-~~~
-FROM ubuntu:18.04
-
-COPY package.json /taiga-docker/submodule/taiga-front/package.json
-~~~
-
-#### 创建一个images
-~~~
-docker build -t taiga-front-dist-gen:v1 .
-~~~
-
-#### run docker images 
-~~~
-docker run -it taiga-front-dist-gen:v1 /bin/bash
-~~~
-
-#### install in images
-~~~
-apt update
-apt install -y git curl vim
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
-
-source ~/.bashrc
-
-nvm install v7.7.2
-
-npm install -g gulp
-
-cd /taiga-docker/submodule/taiga-front
-npm install
-~~~
-
-#### commit
-* docker ps 查看containerid
-* docker commit containerid taiga-front-dist-gen:v3
