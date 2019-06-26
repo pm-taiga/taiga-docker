@@ -82,7 +82,7 @@ def RenderConfig(dictConfig, bRelease):
         "logic/template/frontend/gulp-default/gulp-default.sh": "../../tools/gulp-default.sh",
         ## gulp deploy release
         "logic/template/frontend/gulp-deploy-release/Dockerfile": "../../temp/frontend/gulp-deploy-release/Dockerfile",
-        "../../submodule/taiga-front/package.json": "../../temp/frontend/gulp-deploy-release/package.json",
+        "../../submodule/taiga-front-dist/package.json": "../../temp/frontend/gulp-deploy-release/package.json",
         "logic/template/frontend/gulp-deploy-release/make-gulp-deploy-image-release.sh": "../../tools/make-gulp-deploy-image-release.sh",
         "logic/template/frontend/gulp-deploy-release/gulp-deploy-release.sh": "../../tools/gulp-deploy-release.sh",
     }

@@ -135,7 +135,9 @@ docker-compose.yml
 
 tools/gulp-default.sh
 tools/gulp-deploy.sh
+tools/gulp-deploy-release.sh
 tools/make-gulp-deploy-image.sh
+tools/make-gulp-deploy-image-release.sh
 submodule/taiga-front/dist/
 submodule/taiga-front-dist/
 
