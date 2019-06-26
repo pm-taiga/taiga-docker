@@ -18,10 +18,10 @@ import common.git_util as git_util
 # submodule checkout version
 def SubmoduleCheckout():
     dictSubmoduleToVersion = {
-        "../../submodule/taiga-front": "master",
+        "../../submodule/taiga-front": "4.2.7",
         "../../submodule/taiga-front-dist": "4.2.5-stable",
         "../../submodule/taiga-events": "master",
-        "../../submodule/taiga-back": "master",
+        "../../submodule/taiga-back": "4.2.7",
     }
     for szSubmodule, szVersion in dictSubmoduleToVersion.items():
         logging.getLogger("myLog").debug("git checkout version:%s,%s", szSubmodule, szVersion)

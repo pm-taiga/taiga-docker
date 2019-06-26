@@ -16,6 +16,17 @@ services:
       - POSTGRES_USER={{POST_GRES_SQL_USER}}
       - POSTGRES_PASSWORD={{POST_GRES_SQL_PASSWORD}}
 
+  # postgresql管理软件（可以选择关闭）
+  # 使用介绍：https://hub.docker.com/r/dpage/pgadmin4
+  # http://www.fecshop.com/topic/1470
+  pgadmin4:
+        image: dpage/pgadmin4:4.8
+        ports:
+            - 8001:80
+        environment:
+            PGADMIN_DEFAULT_EMAIL: 111@qq.com
+            PGADMIN_DEFAULT_PASSWORD: 123
+
   redis:
     image: redis:4.0-alpine
 

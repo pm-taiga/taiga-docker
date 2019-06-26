@@ -11,7 +11,7 @@
     "defaultTheme": "taiga",
     "publicRegisterEnabled": {{FRONT_END_PUBLIC_REGISTER_ENABLED}},
     "feedbackEnabled": true,
-    "supportUrl": "https://tree.taiga.io/support",
+    "supportUrl": null,
     "privacyPolicyUrl": null,
     "termsOfServiceUrl": null,
     "GDPRUrl": null,

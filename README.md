@@ -92,6 +92,12 @@ gulp deploy
 docker-compose up
 ~~~
 
+## login
+* first login
+admin
+123123
+* after first login, you can sign up.
+
 ## stop
 one of way
 
