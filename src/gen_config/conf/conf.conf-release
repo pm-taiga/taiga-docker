@@ -1,0 +1,3 @@
+[common]
+SetupConfigPath = conf/setup_config.yml-release
+Release = true

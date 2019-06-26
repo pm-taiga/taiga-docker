@@ -43,7 +43,6 @@ services:
       # - RABBITMQ_HIPE_COMPILE=1
 
   backend:
-    build: temp/backend/
     image: stephenxjc/taiga-docker-back:v2
     volumes:
       - {{PROJECT_BASE_IN_HOST}}/submodule/taiga-back:{{TAIGA_HOME}}/taiga-back
@@ -56,13 +55,12 @@ services:
 
   # use dist version
   frontend:
-    build: temp/frontend/
     image: stephenxjc/taiga-docker-front:v2
     volumes:
       # dist
-      # - {{PROJECT_BASE_IN_HOST}}/submodule/taiga-front-dist/dist:{{TAIGA_HOME}}/taiga-front-dist/dist
+      - {{PROJECT_BASE_IN_HOST}}/submodule/taiga-front-dist/dist:{{TAIGA_HOME}}/taiga-front-dist/dist
       # self dist
-      - {{PROJECT_BASE_IN_HOST}}/submodule/taiga-front/dist:{{TAIGA_HOME}}/taiga-front-dist/dist
+      # - {{PROJECT_BASE_IN_HOST}}/submodule/taiga-front/dist:{{TAIGA_HOME}}/taiga-front-dist/dist
       - taiga_backend_media:/taiga_backend/media
       - /taiga_backend/static-root
     ports:
@@ -85,7 +83,6 @@ services:
       - rabbitmq
 
   events:
-    build: temp/events/
     image: stephenxjc/taiga-docker-events:v2
     volumes:
       - {{PROJECT_BASE_IN_HOST}}/submodule/taiga-events:{{TAIGA_HOME}}/taiga-events

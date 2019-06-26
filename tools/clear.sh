@@ -8,3 +8,4 @@ docker rm $(docker ps -a -q)
 docker volume prune -f
 
 docker rmi taiga-docker_backend taiga-docker_celeryworker taiga-docker_events taiga-docker_frontend
+docker rmi $(docker images | grep "none" | awk '{print $3}') 

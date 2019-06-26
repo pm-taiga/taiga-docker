@@ -1,0 +1,25 @@
+PROJECT_BASE_IN_HOST: ../..
+TAIGA:
+  HOSTNAME: localhost
+  SECRET_KEY: fasdfadsg3qret34542fgvfd
+  API_URL: /api/v1/ 
+  EVENTS_URL: ws://localhost/events
+  HOME: /home/taiga
+  
+URL_SCHEME: http
+
+BACK_END:
+  DEBUG: True
+  DB_CHECK_LIMIT_RETRIES: 5
+  DB_CHECK_SLEEP_INTERVAL: 5
+  PUBLIC_REGISTER_ENABLED: True
+
+FRONT_END:
+  DEBUG: 'true'
+  PUBLIC_REGISTER_ENABLED: 'true'
+
+POST_GRES_SQL:
+  NAME: taiga 
+  USER: taiga
+  PASSWORD: 123
+  HOST: postgresql

@@ -18,10 +18,14 @@ class MyConfigLoader(config_loader.ConfigLoader):
         self.m_szTest = None
 
         self.m_szSetupConfigPath = None
+        self.m_bRelease = False
 
     def ParseConf(self):
         self.m_szSetupConfigPath = self.ParseStr("common", "SetupConfigPath")
         logging.getLogger("myLog").info("SetupConfigPath:" + self.m_szSetupConfigPath)
+
+        self.m_bRelease = self.ParseBool("common", "Release")
+        logging.getLogger("myLog").info("Release:" + str(self.m_bRelease))
 
         return True
 
@@ -36,3 +40,6 @@ class MyConfigLoader(config_loader.ConfigLoader):
     def SetupConfigPath(self):
         return self.m_szSetupConfigPath
 
+    @property
+    def IsRelease(self):
+        return self.m_bRelease
