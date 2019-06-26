@@ -1,7 +1,10 @@
 FROM ubuntu:18.04
 
-RUN mkdir -p /taiga-docker
-WORKDIR /taiga-docker
+# Replace shell with bash so we can source files
+RUN rm /bin/sh && ln -s /bin/bash /bin/sh
+
+COPY package.json /taiga-docker/submodule/taiga-front/package.json
+WORKDIR /taiga-docker/submodule/taiga-front
 
 # env
 ENV LIBSASS_EXT "no"
@@ -9,26 +12,24 @@ ENV LIBSASS_EXT "no"
 # install
 RUN apt update 
 
-RUN apt install -y ruby ruby-all-dev nodejs npm git vim
-RUN update-alternatives --install /usr/bin/node nodejs /usr/bin/nodejs 100
-
-RUN npm install -g gulp
+RUN apt update
+RUN apt install -y git curl vim ruby ruby-all-dev
 
 RUN echo "" >> ~/.bashrc
 RUN echo "if which ruby >/dev/null && which gem >/dev/null; then \nPATH=\"$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH\" \nfi" >> ~/.bashrc
 
-RUN /bin/bash -c "source ~/.bashrc"
-RUN /bin/bash -c "gem install --user-install sass scss_lint"
-RUN /bin/bash -c "npm rebuild node-sass"
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
 
-ARG username
-ARG password
-RUN git clone https://${username}:${password}@github.com/pm-taiga/taiga-front.git
+WORKDIR /taiga-docker/submodule/taiga-front
 
-WORKDIR /taiga-docker/taiga-front
-RUN /bin/bash -c "npm install"
-WORKDIR /taiga-docker
+RUN source ~/.bashrc; \ 
+    gem install --user-install sass scss_lint;
 
-RUN rm -rf /taiga-docker/taiga-front
+RUN source ~/.nvm/nvm.sh;\
+    npm rebuild node-sass; \
+    nvm install v7.7.2; \
+    npm install -g gulp; \
+    npm rebuild node-sass; \
+    npm install;
 
 CMD ["gulp"]

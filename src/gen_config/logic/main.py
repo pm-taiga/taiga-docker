@@ -18,10 +18,10 @@ import common.git_util as git_util
 # submodule checkout version
 def SubmoduleCheckout():
     dictSubmoduleToVersion = {
-        "../../submodule/taiga-front": "4.2.7",
+        "../../submodule/taiga-front": "master",
         "../../submodule/taiga-front-dist": "4.2.5-stable",
         "../../submodule/taiga-events": "master",
-        "../../submodule/taiga-back": "4.2.7",
+        "../../submodule/taiga-back": "master",
     }
     for szSubmodule, szVersion in dictSubmoduleToVersion.items():
         logging.getLogger("myLog").debug("git checkout version:%s,%s", szSubmodule, szVersion)
@@ -60,7 +60,7 @@ def RenderConfig(dictConfig):
         "logic/template/docker-compose.yml": "../../docker-compose.yml",
         
         # backend
-        "logic/template/backend/requirements.txt": "../../temp/backend/requirements.txt",
+        "../../submodule/taiga-back/requirements.txt": "../../temp/backend/requirements.txt",
         "logic/template/backend/Dockerfile": "../../temp/backend/Dockerfile",
         "logic/template/backend/scripts/checkdb.py": "../../temp/backend/scripts/checkdb.py",
         "logic/template/backend/scripts/entrypoint.sh": "../../temp/backend/scripts/entrypoint.sh",
@@ -69,7 +69,7 @@ def RenderConfig(dictConfig):
 
         # events
         "logic/template/events/Dockerfile": "../../temp/events/Dockerfile",
-        "logic/template/events/package.json": "../../temp/events/package.json",
+        "../../submodule/taiga-events/package.json": "../../temp/events/package.json",
         "logic/template/events/config.json": "../../submodule/taiga-events/config.json",
 
         # frontend
@@ -79,7 +79,7 @@ def RenderConfig(dictConfig):
         "logic/template/frontend/conf.json": "../../submodule/taiga-front/dist/conf.json",
         ## gulp deploy
         "logic/template/frontend/gulp-deploy/Dockerfile": "../../temp/frontend/gulp-deploy/Dockerfile",
-        "logic/template/frontend/gulp-deploy/package.json": "../../temp/frontend/gulp-deploy/package.json",
+        "../../submodule/taiga-front/package.json": "../../temp/frontend/gulp-deploy/package.json",
         "logic/template/frontend/gulp-deploy/make-gulp-deploy-image.sh": "../../tools/make-gulp-deploy-image.sh",
         "logic/template/frontend/gulp-deploy/gulp-deploy.sh": "../../tools/gulp-deploy.sh",
         "logic/template/frontend/gulp-default/gulp-default.sh": "../../tools/gulp-default.sh",
