@@ -72,8 +72,9 @@ def RenderConfig(dictConfig, bRelease):
         # frontend
         "logic/template/frontend/Dockerfile": "../../temp/frontend/Dockerfile",
         "logic/template/frontend/nginx/default.conf": "../../temp/frontend/nginx/default.conf",
-        "logic/template/frontend/conf.json": "../../submodule/taiga-front-dist/dist/conf.json",
         "logic/template/frontend/conf.json": "../../submodule/taiga-front/dist/conf.json",
+        # dist
+        "logic/template/frontend/conf.json": "../../submodule/taiga-front-dist/dist/conf.json",
         ## gulp deploy
         "logic/template/frontend/gulp-deploy/Dockerfile": "../../temp/frontend/gulp-deploy/Dockerfile",
         "../../submodule/taiga-front/package.json": "../../temp/frontend/gulp-deploy/package.json",
