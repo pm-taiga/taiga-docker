@@ -15,6 +15,7 @@ BACK_END:
   PUBLIC_REGISTER_ENABLED: True
 
 FRONT_END:
+  HOME_URL: http://pmhub.top/
   DEBUG: 'true'
   PUBLIC_REGISTER_ENABLED: 'true'
 

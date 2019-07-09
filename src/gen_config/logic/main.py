@@ -54,49 +54,57 @@ def LoadConfig(szFilePath):
         return dictOutputConfig
 
 def RenderConfig(dictConfig, bRelease):
+    dictFileMap = {}
+    def AddDictFile(szKey, szValue):
+        if szKey not in dictFileMap:
+            dictFileMap[szKey] = [szValue]
+        else:
+            dictFileMap[szKey].append(szValue)
+    
     # render file to target
-    dictFileMap = {
-        # backend
-        "../../submodule/taiga-back/requirements.txt": "../../temp/backend/requirements.txt",
-        "logic/template/backend/Dockerfile": "../../temp/backend/Dockerfile",
-        "logic/template/backend/scripts/checkdb.py": "../../temp/backend/scripts/checkdb.py",
-        "logic/template/backend/scripts/entrypoint.sh": "../../temp/backend/scripts/entrypoint.sh",
-        "logic/template/backend/local.py": "../../submodule/taiga-back/settings/local.py",
-        "logic/template/backend/celery_local.py": "../../submodule/taiga-back/settings/celery_local.py",
+    # backend
+    AddDictFile("../../submodule/taiga-back/requirements.txt", "../../temp/backend/requirements.txt")
+    AddDictFile("logic/template/backend/Dockerfile", "../../temp/backend/Dockerfile")
+    AddDictFile("logic/template/backend/scripts/checkdb.py", "../../temp/backend/scripts/checkdb.py")
+    AddDictFile("logic/template/backend/scripts/entrypoint.sh", "../../temp/backend/scripts/entrypoint.sh")
+    AddDictFile("logic/template/backend/local.py", "../../submodule/taiga-back/settings/local.py")
+    AddDictFile("logic/template/backend/celery_local.py", "../../submodule/taiga-back/settings/celery_local.py")
 
-        # events
-        "logic/template/events/Dockerfile": "../../temp/events/Dockerfile",
-        "../../submodule/taiga-events/package.json": "../../temp/events/package.json",
-        "logic/template/events/config.json": "../../submodule/taiga-events/config.json",
+    # events
+    AddDictFile("logic/template/events/Dockerfile", "../../temp/events/Dockerfile")
+    AddDictFile("../../submodule/taiga-events/package.json", "../../temp/events/package.json")
+    AddDictFile("logic/template/events/config.json", "../../submodule/taiga-events/config.json")
 
-        # frontend
-        "logic/template/frontend/Dockerfile": "../../temp/frontend/Dockerfile",
-        "logic/template/frontend/nginx/default.conf": "../../temp/frontend/nginx/default.conf",
-        "logic/template/frontend/conf.json": "../../submodule/taiga-front/dist/conf.json",
-        # dist
-        "logic/template/frontend/conf.json": "../../submodule/taiga-front-dist/dist/conf.json",
-        ## gulp deploy
-        "logic/template/frontend/gulp-deploy/Dockerfile": "../../temp/frontend/gulp-deploy/Dockerfile",
-        "../../submodule/taiga-front/package.json": "../../temp/frontend/gulp-deploy/package.json",
-        "logic/template/frontend/gulp-deploy/make-gulp-deploy-image.sh": "../../tools/make-gulp-deploy-image.sh",
-        "logic/template/frontend/gulp-deploy/gulp-deploy.sh": "../../tools/gulp-deploy.sh",
-        "logic/template/frontend/gulp-default/gulp-default.sh": "../../tools/gulp-default.sh",
-        ## gulp deploy release
-        "logic/template/frontend/gulp-deploy-release/Dockerfile": "../../temp/frontend/gulp-deploy-release/Dockerfile",
-        "../../submodule/taiga-front-dist/package.json": "../../temp/frontend/gulp-deploy-release/package.json",
-        "logic/template/frontend/gulp-deploy-release/make-gulp-deploy-image-release.sh": "../../tools/make-gulp-deploy-image-release.sh",
-        "logic/template/frontend/gulp-deploy-release/gulp-deploy-release.sh": "../../tools/gulp-deploy-release.sh",
-    }
+    # frontend
+    AddDictFile("logic/template/frontend/Dockerfile", "../../temp/frontend/Dockerfile")
+    AddDictFile("logic/template/frontend/nginx/default.conf", "../../temp/frontend/nginx/default.conf")
+    AddDictFile("logic/template/frontend/conf.json", "../../submodule/taiga-front/dist/conf.json")
+    
+    # dist
+    AddDictFile("logic/template/frontend/conf.json", "../../submodule/taiga-front-dist/dist/conf.json")
+
+    ## gulp deploy
+    AddDictFile("logic/template/frontend/gulp-deploy/Dockerfile", "../../temp/frontend/gulp-deploy/Dockerfile")
+    AddDictFile("../../submodule/taiga-front/package.json", "../../temp/frontend/gulp-deploy/package.json")
+    AddDictFile("logic/template/frontend/gulp-deploy/make-gulp-deploy-image.sh", "../../tools/make-gulp-deploy-image.sh")
+    AddDictFile("logic/template/frontend/gulp-deploy/gulp-deploy.sh", "../../tools/gulp-deploy.sh")
+    AddDictFile("logic/template/frontend/gulp-default/gulp-default.sh", "../../tools/gulp-default.sh")
+
+    ## gulp deploy release
+    AddDictFile("logic/template/frontend/gulp-deploy-release/Dockerfile", "../../temp/frontend/gulp-deploy-release/Dockerfile")
+    AddDictFile("../../submodule/taiga-front-dist/package.json", "../../temp/frontend/gulp-deploy-release/package.json")
+    AddDictFile("logic/template/frontend/gulp-deploy-release/make-gulp-deploy-image-release.sh", "../../tools/make-gulp-deploy-image-release.sh")
+    AddDictFile("logic/template/frontend/gulp-deploy-release/gulp-deploy-release.sh", "../../tools/gulp-deploy-release.sh")
 
     if bRelease:
-        dictFileMap["logic/template/docker-compose.yml-release"] = "../../docker-compose.yml"
+        AddDictFile("logic/template/docker-compose.yml-release", "../../docker-compose.yml")
     else:
-        dictFileMap["logic/template/docker-compose.yml"] = "../../docker-compose.yml"
+        AddDictFile("logic/template/docker-compose.yml", "../../docker-compose.yml")
 
-    for szKey, szValue in dictFileMap.items():
-        logging.getLogger("myLog").debug("render config:%s, %s", szKey, szValue)
-        util.RenderConfig(szKey, szValue, dictConfig)
-    pass
+    for szKey, listValue in dictFileMap.items():
+        for szValue in listValue:
+            logging.getLogger("myLog").debug("render config:%s, %s", szKey, szValue)
+            util.RenderConfig(szKey, szValue, dictConfig)
 
 def Main(args):
     logging.getLogger("myLog").debug("main start")

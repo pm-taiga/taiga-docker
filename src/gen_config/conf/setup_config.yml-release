@@ -9,6 +9,7 @@ TAIGA:
 URL_SCHEME: http
 
 BACK_END:
+  HOME_URL: http://pmhub.top/
   DEBUG: True
   DB_CHECK_LIMIT_RETRIES: 5
   DB_CHECK_SLEEP_INTERVAL: 5

@@ -20,5 +20,6 @@
     "tribeHost": null,
     "importers": [],
     "gravatar": true,
-    "rtlLanguages": ["fa"]
+    "rtlLanguages": ["fa"],
+    "homeUrl": "{{FRONT_END_HOME_URL}}"
 }
