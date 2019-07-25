@@ -19,7 +19,7 @@ import common.git_util as git_util
 def SubmoduleCheckout():
     dictSubmoduleToVersion = {
         "../../submodule/taiga-front": "master",
-        "../../submodule/taiga-front-dist": "4.2.6-1-stable",
+        "../../submodule/taiga-front-dist": "master",
         "../../submodule/taiga-events": "master",
         "../../submodule/taiga-back": "master",
     }
